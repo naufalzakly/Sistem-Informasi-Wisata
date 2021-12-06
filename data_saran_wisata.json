@@ -1,0 +1,8 @@
+[
+  {
+    "nama": "tanjung",
+    "alamat": "Jl. Raya Lojejer",
+    "harga_tiket_weekday": 2000,
+    "harga_tiket_weekend": 5000
+  }
+]

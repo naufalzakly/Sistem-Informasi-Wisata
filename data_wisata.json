@@ -1,0 +1,20 @@
+[
+  {
+    "nama": "Papuma",
+    "alamat": "Jl. Raya Lojejer ",
+    "harga_tiket_weekday": 7000,
+    "harga_tiket_weekend": 15000
+  },
+  {
+    "nama": "Mandala",
+    "alamat": "Jl. Raya Lojejer",
+    "harga_tiket_weekday": 5000,
+    "harga_tiket_weekend": 10000
+  },
+  {
+    "nama": "tanjung",
+    "alamat": "Jl. Raya Lojejer",
+    "harga_tiket_weekday": 2000,
+    "harga_tiket_weekend": 5000
+  }
+]
