@@ -1,8 +1,16 @@
 [
   {
-    "nama": "tanjung",
-    "alamat": "Jl. Raya Lojejer",
-    "harga_tiket_weekday": 2000,
+    "nama": "Pantai Papuma",
+    "alamat": "Desa Lojejer, Kecamatan Wuluhan",
+    "kategori": "Pantai",
+    "harga_tiket_weekday": 2500,
     "harga_tiket_weekend": 5000
+  },
+  {
+    "nama": "Pantai Puger",
+    "alamat": "Jl. Pelabuhan,Desa Puger Wetan,Kecamatan Puger",
+    "kategori": "Pantai",
+    "harga_tiket_weekday": 5000,
+    "harga_tiket_weekend": 7500
   }
 ]
