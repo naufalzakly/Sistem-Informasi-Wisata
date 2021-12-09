@@ -1,20 +1,87 @@
 [
   {
-    "nama": "Papuma",
-    "alamat": "Jl. Raya Lojejer ",
-    "harga_tiket_weekday": 7000,
-    "harga_tiket_weekend": 15000
+    "nama": "Pantai Papuma",
+    "alamat": "Desa Lojejer, Kecamatan Wuluhan",
+    "kategori": "Pantai",
+    "harga_tiket_weekday": 2500,
+    "harga_tiket_weekend": 5000
   },
   {
-    "nama": "Mandala",
-    "alamat": "Jl. Raya Lojejer",
+    "nama": "Taman Nasional Meru Beitri",
+    "alamat": "Jl. Sriwijaya No.53, Kecamatan Sumbersari ",
+    "kategori": "Taman",
     "harga_tiket_weekday": 5000,
+    "harga_tiket_weekend": 7500
+  },
+  {
+    "nama": "Kebun Teh Gunung Gambir",
+    "alamat": "Jl. Pasi Desa Gelang, Kecamatan Sumber Baru",
+    "kategori": "Kebun",
+    "harga_tiket_weekday": 10000,
     "harga_tiket_weekend": 10000
   },
   {
-    "nama": "tanjung",
-    "alamat": "Jl. Raya Lojejer",
-    "harga_tiket_weekday": 2000,
+    "nama": "Air Terjun Tancak",
+    "alamat": "Desa Suci, Kecamatan Panti",
+    "kategori": "Air Terjun",
+    "harga_tiket_weekday": 5000,
     "harga_tiket_weekend": 5000
+  },
+  {
+    "nama": "Air Terjun Antrokan",
+    "alamat": "Desa Manggisan, Kecamatan Tanggul",
+    "kategori": "Air Terjun",
+    "harga_tiket_weekday": 0,
+    "harga_tiket_weekend": 0
+  },
+  {
+    "nama": " Pantai Bandealit",
+    "alamat": "Desa Andongrejo, Kecamatan Tempurejo",
+    "kategori": "Pantai",
+    "harga_tiket_weekday": 5000,
+    "harga_tiket_weekend": 5000
+  },
+  {
+    "nama": "Pantai Payangan",
+    "alamat": " Dusun Payangan, Desa Sumberrejo, Kecamatan Ambulu",
+    "kategori": "Pantai",
+    "harga_tiket_weekday": 5000,
+    "harga_tiket_weekend": 5000
+  },
+  {
+    "nama": "Taman Edukasi Botani",
+    "alamat": "Jl. Jalan Mujahir, Kecamatan Sukorambi",
+    "kategori": "Taman",
+    "harga_tiket_weekday": 7000,
+    "harga_tiket_weekend": 7000
+  },
+
+  {
+    "nama": "Taman Galaxy",
+    "alamat": "Area Sawah/Kebun, Kecamatan Tempurejo",
+    "kategori": "Taman",
+    "harga_tiket_weekday": 10000,
+    "harga_tiket_weekend": 10000
+  },
+  {
+    "nama": "Kebun Belimbing ",
+    "alamat": "Desa Tamansari, Kecamatan Wuluhan",
+    "kategori": "Kebun",
+    "harga_tiket_weekday": 0,
+    "harga_tiket_weekend": 0
+  },
+  {
+    "nama": "Agrowisata Rembangan",
+    "alamat": "Desa Kemuninglor, Kecamatan Arjasa ",
+    "kategori": "Kebun",
+    "harga_tiket_weekday": 0,
+    "harga_tiket_weekend": 0
+  },
+  {
+    "nama": "Pantai Puger",
+    "alamat": "Jl. Pelabuhan,Desa Puger Wetan,Kecamatan Puger ",
+    "kategori": "Pantai",
+    "harga_tiket_weekday": 5000,
+    "harga_tiket_weekend": 7500
   }
 ]
