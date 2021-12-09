@@ -1,5 +1,8 @@
 import getpass
 import json
+import statistics
+from tabulate import tabulate
+
 
 data_wisata = "data_wisata.json"
 data_admin = "data_admin.json"
@@ -11,7 +14,7 @@ def login_Admin():
     username = input("Masukan Username Anda: ")
     password = str(getpass.getpass("Masukan Password: "))
     ulang = 0
-    while ulang <= 2 and username != isi_data['username'] and password != isi_data['password']:
+    while ulang <= 2 and username != isi_data['username'] or password != isi_data['password']:
         print("Password yang anda masukan Salah!")
         username = input("\nMasukan Username Anda: ")
         password = str(getpass.getpass("Masukan Password: "))
@@ -63,19 +66,68 @@ def update_PasswordAdmin():
             else:
                 print("Password Gagal Diperbarui")
 
+def show_wisata_admin():
+    temp = []
+    nama = []
+    alamat = []
+    kategori = []
+    tiket_weekend = []
+    tiket_weekday = []
+    with open (data_wisata, "r") as data:
+        isi_data = json.load(data)
+    temp = isi_data
+    header = ['Nama','Alamat','Ketegori','Tiket Ketika Weekend','Harga Ketika Weekday']
+    table1 = []
+    
+    for i in temp:
+        nama = i['nama']
+        alamat = i['alamat']
+        kategori = i['kategori']
+        tiket_weekend = i['harga_tiket_weekend']
+        tiket_weekday = i['harga_tiket_weekday']
+        table1.append([nama,alamat,kategori,tiket_weekday,tiket_weekend])
+        
+    print(tabulate(table1,header,tablefmt='fancy_grid'))
+    print("\n")
+    show_menu2_admin()
+
+def show_saran_wisata_admin():
+    temp = []
+    nama = []
+    alamat = []
+    kategori = []
+    tiket_weekend = []
+    tiket_weekday = []
+    with open (data_saran_wisata, "r") as data:
+        isi_data = json.load(data)
+    temp = isi_data
+    header = ['Nama','Alamat','Kategori','Tiket Ketika Weekend','Harga Ketika Weekday']
+    table = []
+    for i in temp:
+        nama = i['nama']
+        alamat = i['alamat']
+        kategori = i['kategori']
+        tiket_weekend = i['harga_tiket_weekend']
+        tiket_weekday = i['harga_tiket_weekday']
+        table.append([nama,alamat,kategori,tiket_weekday,tiket_weekend])
+    print(tabulate(table,header,tablefmt='fancy_grid'))
+    show_menu2_admin()
+
 def insert_wisata():
     temp = {}
     with open (data_wisata, "r") as data:
         isi_data = json.load(data)
     temp = isi_data
     
-    nama = input("Masukan nama wisata: ")
-    alamat = input("Masukan alamat wisata: ")
+    nama = input("Masukan Nama Wisata: ")
+    alamat = input("Masukan Alamat Wisata: ")
+    kategori = input("Masukan Kategori Wisata: ")
     harga_tiket_weekday = int(input("Masukan harga saaat weekday: "))
     harga_tiket_weekend= int(input("Masukan harga saaat weekend: "))
     temp.append({
         'nama':nama,
         'alamat':alamat,
+        'kategori':kategori,
         'harga_tiket_weekday':harga_tiket_weekday,
         'harga_tiket_weekend':harga_tiket_weekend
     })
@@ -84,52 +136,141 @@ def insert_wisata():
         dataa = json.dumps(temp, indent=4)
         data_file.write(dataa)
         print("Berhasil ditambahkan")
+    show_menu2_admin()
 
-def insert_saran_wisata():
+def update_wisata():
     temp = {}
-    with open (data_saran_wisata, "r") as data:
+    with open (data_wisata, "r") as data:
         isi_data = json.load(data)
     temp = isi_data
     
-    nama = input("Masukan nama wisata: ")
-    alamat = input("Masukan alamat wisata: ")
+    nama = input("Masukan Nama Wisata: ")
+    alamat = input("Masukan Alamat Wisata: ")
+    kategori = input("Masukan Kategori Wisata: ")
     harga_tiket_weekday = int(input("Masukan harga saaat weekday: "))
     harga_tiket_weekend= int(input("Masukan harga saaat weekend: "))
-    temp.append({
-        'nama':nama,
-        'alamat':alamat,
-        'harga_tiket_weekday':harga_tiket_weekday,
-        'harga_tiket_weekend':harga_tiket_weekend
-    })
-
+    temp['nama'] = nama
+    temp['alamat'] = alamat
+    temp['kategori'] = kategori
+    temp['harga_tiket_weekday'] = harga_tiket_weekday
+    temp['harga_tiket_weekend'] = harga_tiket_weekend
     with open (data_wisata, "w") as data_file:
         dataa = json.dumps(temp, indent=4)
         data_file.write(dataa)
         print("Berhasil ditambahkan")
+    show_menu2_admin()
+
+def show_wisata_user():
+    temp = []
+    nama = []
+    alamat = []
+    kategori = []
+    tiket_weekend = []
+    tiket_weekday = []
+    with open (data_wisata, "r") as data:
+        isi_data = json.load(data)
+    temp = isi_data
+    header = ['Nama','Alamat','Ketegori','Tiket Ketika Weekend','Harga Ketika Weekday']
+    table = []
+    
+    for i in temp:
+        nama = i['nama']
+        alamat = i['alamat']
+        kategori = i['kategori']
+        tiket_weekend = i['harga_tiket_weekend']
+        tiket_weekday = i['harga_tiket_weekday']
+        table.append([nama,alamat,kategori,tiket_weekday,tiket_weekend])
+        
+    print(tabulate(table,header,tablefmt='fancy_grid'))
+    print("\n")
+    show_menu2_user()
+
+def insert_saran_wisata():
+    temp = []
+    with open (data_saran_wisata, "r") as data:
+        isi_data = json.load(data)
+    temp = isi_data
+    inputan_user = int(input("Apa Anda Setuju mengisi data dengan sebenar-benarnya ?\n1.Iya\t.Tidak "))
+    if inputan_user == 1:  
+        nama = input("Masukan nama wisata: ")
+        alamat = input("Masukan alamat wisata: ")
+        kategori = input("Masukan Kategori Wisata: ")
+        harga_tiket_weekday = int(input("Masukan harga saaat weekday: "))
+        harga_tiket_weekend= int(input("Masukan harga saaat weekend: "))
+        temp.append({
+            'nama':nama,
+            'alamat':alamat,
+            'kategori':kategori,
+            'harga_tiket_weekday':harga_tiket_weekday,
+            'harga_tiket_weekend':harga_tiket_weekend
+        })
+
+        with open (data_wisata, "w") as data_file:
+            dataa = json.dumps(temp, indent=4)
+            data_file.write(dataa)
+            print("Berhasil ditambahkan")
+    elif inputan_user == 2:
+        show_menu_user()
+    else:
+        print("inputan Tidak Tersedia")
+        show_menu_user()
 
 
-def show_wisata():
+def jumlah_wisata():
     temp = []
 
     with open (data_wisata, "r") as data:
         isi_data = json.load(data)
     temp = isi_data
+    print ("----------- Berikut Daftar Kategori ----------")
+    print ("[1] Air Terjun\n[2] Kebun\n[3] Pantai\n[4] Taman\n[5] Semua Kategori\n[6] Menu Utama User")
+    input_user = int(input("Pilih Kategori: "))
+    if input_user == 1:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Air Terjun':
+                sum +=1
+        print("="*100)
+        print("\t\tJumlah Wisata untuk Kategori Air Terjun: ",sum)
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 2:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Kebun':
+                sum +=1
+        print("="*100)
+        print("\t\tJumlah Wisata untuk Kategori Air Terjun: ",sum)
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 3:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Pantai':
+                sum +=1
+        print("="*100)
+        print("\t\tJumlah Wisata untuk Kategori Air Terjun: ",sum)
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 4:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Taman':
+                sum +=1
+        print("="*100)
+        print("\t\tJumlah Wisata untuk Kategori Air Terjun: ",sum)
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 5:
+        print("="*100)
+        print("\t\t\t\tJumlah Wisata pada Sistem: ",len(temp))
+        print("="*100)
     
-    print('Nama','\t\tAlamat','\t\tHarga Tiket Weekday','\tHarga Tiket Weekend')
-    print('='*150)
-    for i in temp:
-        print(f"{i['nama']}\t\t{i['alamat']}\t{i['harga_tiket_weekday']}\t\t{i['harga_tiket_weekend']}")
-def show_saran_wisata():
-    temp = []
-
-    with open (data_saran_wisata, "r") as data:
-        isi_data = json.load(data)
-    temp = isi_data
-    
-    print('Nama','\t\tAlamat','\t\t\tHarga Tiket Weekday','\tHarga Tiket Weekend')
-    print('='*150)
-    for i in temp:
-        print(f"{i['nama']}\t\t{i['alamat']}\t{i['harga_tiket_weekday']}\t\t\t{i['harga_tiket_weekend']}")
+    elif input_user == 6:
+        show_menu_user()
+    else:
+        print("Inputan Salah")
+        total_tiket_weekend()
 
 def total_tiket_weekday():
     temp = []
@@ -137,10 +278,61 @@ def total_tiket_weekday():
     with open (data_wisata, "r") as data:
         isi_data = json.load(data)
     temp = isi_data
-    sum = 0
-    for i in temp:
-        sum = sum +i['harga_tiket_weekday']
-        print("Total Harga Tiket Weekday",sum)
+    print ("----------- Berikut Daftar Kategori ----------")
+    print ("[1] Air Terjun\n[2] Kebun\n[3] Pantai\n[4] Taman\n[5] Semua Kategori\n[6] Menu Utama User")
+    input_user = int(input("Pilih Kategori: "))
+    if input_user == 1:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Air Terjun':
+
+                sum = sum +i['harga_tiket_weekday']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekday untuk Kategori Air Terjun Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 2:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Kebun':
+
+                sum = sum +i['harga_tiket_weekday']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekday untuk Kategori Kebun Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 3:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Pantai':
+
+                sum = sum +i['harga_tiket_weekday']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekday untuk Kategori Pantai Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 4:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Taman':
+                sum = sum +i['harga_tiket_weekday']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekday untuk Kategori Taman Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 5:
+        sum = 0
+        for i in temp:
+            sum = sum +i['harga_tiket_weekday']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekday untuk Semua Kategori  Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 6:
+        show_menu_user()
+    else:
+        print("Inputan Salah")
+        total_tiket_weekend()
 
 def total_tiket_weekend():
     temp = []
@@ -148,61 +340,282 @@ def total_tiket_weekend():
     with open (data_wisata, "r") as data:
         isi_data = json.load(data)
     temp = isi_data
-    sum = 0
-    for i in temp:
-        sum = sum +i['harga_tiket_weekend']
-        print("Total Harga Tiket Weekend",sum)
-def total_tiket():
+    print ("----------- Berikut Daftar Kategori ----------")
+    print ("[1] Air Terjun\n[2] Kebun\n[3] Pantai\n[4] Taman\n[5] Semua Kategori\n[6] Menu Utama User")
+    input_user = int(input("Pilih Kategori: "))
+    if input_user == 1:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Air Terjun':
+
+                sum = sum +i['harga_tiket_weekend']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekend untuk Kategori Air Terjun Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 2:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Kebun':
+
+                sum = sum +i['harga_tiket_weekend']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekend untuk Kategori Kebun Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 3:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Pantai':
+
+                sum = sum +i['harga_tiket_weekend']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekend untuk Kategori Pantai Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 4:
+        sum = 0
+        for i in temp:
+            if i['kategori'] == 'Taman':
+                sum = sum +i['harga_tiket_weekend']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekend untuk Kategori Taman Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 5:
+        sum = 0
+        for i in temp:
+            sum = sum +i['harga_tiket_weekend']
+        print("="*100)
+        print("\t\tTotal Harga Tiket Weekend untuk Semua Kategori  Rp.",sum,",-")
+        print("="*100)
+        total_tiket_weekend()
+    elif input_user == 6:
+        show_menu_user()
+    else:
+        print("Inputan Salah")
+        total_tiket_weekend()
+
+
+def mean_weekend():
     temp = []
 
     with open (data_wisata, "r") as data:
         isi_data = json.load(data)
     temp = isi_data
-    sum = 0
-    for i in temp:
-        sum = sum +i['harga_tiket_weekend']+i['harga_tiket_weekend']
-        print("Total Harga Tiket Weekend dan weekday",sum)
+    print ("----------- Berikut Daftar Kategori ----------")
+    print ("[1] Air Terjun\n[2] Kebun\n[3] Pantai\n[4] Taman\n[5] Semua Kategori\n[6] Menu Utama User")
+    input_user = int(input("Pilih Kategori: "))
+    if input_user == 1:
+        sum = 0
+        data = []
+        for i in temp:
+            if i['kategori'] == 'Air Terjun':
+                sum = sum +i['harga_tiket_weekend']
+                data.append(sum)
+                rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekend untuk Kategori Air Terjun Rp.",rerata,",-")
+        print("="*100)
+        mean_weekend()
+    elif input_user == 2:
+        sum = 0
+        data = []
+        for i in temp:
+            if i['kategori'] == 'Kebun':
+                sum = sum +i['harga_tiket_weekend']
+                data.append(sum)
+                rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekend untuk Kategori Kebun Rp.",rerata,",-")
+        print("="*100)
+        mean_weekend()
+    elif input_user == 3:
+        sum = 0
+        data = []
+        for i in temp:
+            if i['kategori'] == 'Pantai':
+                sum = sum +i['harga_tiket_weekend']
+                data.append(sum)
+                rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekend untuk Kategori Pantai Rp.",rerata,",-")
+        print("="*100)
+        mean_weekend()
+    elif input_user == 4:
+        sum = 0
+        data = []
+        for i in temp:
+            if i['kategori'] == 'Taman':
+                sum = sum +i['harga_tiket_weekend']
+                data.append(sum)
+                rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekend untuk Kategori Taman Rp.",rerata,",-")
+        print("="*100)
+        mean_weekend()
+    elif input_user == 5:
+        sum = 0
+        data = []
+        for i in temp:
+            sum = sum +i['harga_tiket_weekend']
+            data.append(sum)
+            rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekend untuk Semua Kategori  Rp.",rerata,",-")
+        print("="*100)
+        mean_weekend()
+    elif input_user == 6:
+        show_menu_user()
+    else:
+        print("Inputan Salah")
+        mean_weekend()
 
+
+def mean_weekday():
+    temp = []
+
+    with open (data_wisata, "r") as data:
+        isi_data = json.load(data)
+    temp = isi_data
+    print ("----------- Berikut Daftar Kategori ----------")
+    print ("[1] Air Terjun\n[2] Kebun\n[3] Pantai\n[4] Taman\n[5] Semua Kategori\n[6] Menu Utama User")
+    input_user = int(input("Pilih Kategori: "))
+    if input_user == 1:
+        sum = 0
+        data = []
+        for i in temp:
+            if i['kategori'] == 'Air Terjun':
+                sum = sum +i['harga_tiket_weekday']
+                data.append(sum)
+                rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekday untuk Kategori Air Terjun Rp.",rerata,",-")
+        print("="*100)
+        mean_weekday()
+    elif input_user == 2:
+        sum = 0
+        data = []
+        for i in temp:
+            if i['kategori'] == 'Kebun':
+                sum = sum +i['harga_tiket_weekday']
+                data.append(sum)
+                rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekday untuk Kategori Kebun Rp.",rerata,",-")
+        print("="*100)
+        mean_weekday()
+    elif input_user == 3:
+        sum = 0
+        data = []
+        for i in temp:
+            if i['kategori'] == 'Pantai':
+                sum = sum +i['harga_tiket_weekday']
+                data.append(sum)
+                rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekday untuk Kategori Pantai Rp.",rerata,",-")
+        print("="*100)
+        mean_weekday()
+    elif input_user == 4:
+        sum = 0
+        data = []
+        for i in temp:
+            if i['kategori'] == 'Taman':
+                sum = sum +i['harga_tiket_weekday']
+                data.append(sum)
+                rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekday untuk Kategori Taman Rp.",rerata,",-")
+        print("="*100)
+        mean_weekday()
+    elif input_user == 5:
+        sum = 0
+        data = []
+        for i in temp:
+            sum = sum +i['harga_tiket_weekday']
+            data.append(sum)
+            rerata = statistics.mean(data)
+        print("="*100)
+        print("\t\tRata-Rata Harga Tiket Weekday untuk Semua Kategori  Rp.",rerata,",-")
+        print("="*100)
+        mean_weekday()
+    elif input_user == 6:
+        show_menu_user()
+    else:
+        print("Inputan Salah")
+        mean_weekday()
 
 def show_menu_user():
     print ("\n")
     print ("----------- Halo Kak, Selamat Beraktivitas ----------")
     print ("[1] Melihat Wisata")
     print ("[2] Mengajukan Wisata")
-    print ("[3] Total Harga Tiket Masuk Weekday Semua Wisata")
-    print ("[4] Total Harga Tiket Masuk Weekend Semua Wisata")
-    print ("[5] Exit")
+    print ("[3] Exit")
     menu = int(input("PILIH MENU: "))
     print ("\n")
-
     if menu == 1:
-        show_wisata()
+        show_wisata_user()
     elif menu == 2:
-        show_saran_wisata()
+        insert_saran_wisata() 
     elif menu == 3:
-        total_tiket_weekday()
-    elif menu == 4:
+        exit()
+    else:
+        print ("Salah pilih!")
+def show_menu2_user():
+    print ("\n")
+    print ("----------- Halo Kak, Selamat Beraktivitas ----------")
+    print ("[1] Menu Utama User")
+    print ("[2] Jumlah Wisata Berdasarkan Kategori")
+    print ("[3] Total Harga Tiket Berdasarkan Kategori Wisata pada Weekend")
+    print ("[4] Total Harga Tiket Berdasarkan Kategori Wisata pada Weekday")
+    print ("[5] Rata-Rata Harga Tiket Berdasarkan Kategori Wisata pada Weekend")
+    print ("[6] Rata-Rata Harga Tiket Berdasarkan Kategori Wisata pada Weekday")
+    print ("[7] Exit")
+    menu = int(input("PILIH MENU: "))
+    print ("\n")
+    if menu == 1:
+        show_menu_user()
+    elif menu == 2:
+        jumlah_wisata()
+    elif menu == 3:
         total_tiket_weekend()
+    elif menu == 4:
+        mean_weekend()
     elif menu == 5:
+        mean_weekday()    
+    elif menu == 7:
+        exit()
+    else:
+        print ("Salah pilih!")
+def show_menu_admin():
+    print ("\n")
+    print ("----------- Halo Admin, Selamat Beraktivitas ----------")
+    print ("[1] Melihat Wisata\n[2] Melihat Saran Wisata\n[3] Exit")
+    menu = int(input("PILIH MENU: "))
+    print ("\n")
+    if menu == 1:
+        show_wisata_admin()
+    elif menu == 2:
+        show_saran_wisata_admin()
+    elif menu == 3:
         exit()
     else:
         print ("Salah pilih!")
 
-def show_menu_admin():
+def show_menu2_admin():
     print ("\n")
     print ("----------- Halo Admin, Selamat Beraktivitas ----------")
-    print ("[1] Melihat Wisata")
-    print ("[2] Menambahkan Wisata")
-    print ("[3] Melihat Saran Wisata")
-    print ("[4] Exit")
+    print ("[1] Menu Utama Admin\n[2] Menambahkan Wisata\n[3] Mengedit Wisata\n[4] Exit")
     menu = int(input("PILIH MENU: "))
     print ("\n")
-
-    if menu == 1:
-        show_wisata()
+    if menu ==1 :
+        show_menu_admin()
     elif menu == 2:
         insert_wisata()
     elif menu == 3:
+        update_wisata()
+    elif menu == 4:
         exit()
     else:
         print ("Salah pilih!")
@@ -210,14 +623,9 @@ def show_menu_admin():
 def show_menu():
     print ("\n")
     print ("----------- Selamat Datang di Nuasa.co ----------")
-    print ("[1] Melihat Wisata sebagai User")
-    print ("[2] Melihat Wisata Sebagai Admin")
-    print ("[3] Update Password Admin")
-    print ("[4] Exit")
-    
+    print ("[1] Melihat Wisata sebagai User\n[2] Melihat Wisata Sebagai Admin\n[3] Update Password Admin\n[4] Exit")
     menu = int(input("PILIH MENU: "))
     print ("\n")
-
     if menu == 1:
         show_menu_user()
     elif menu == 2:
@@ -228,9 +636,5 @@ def show_menu():
         exit()
     else:
         print ("Salah pilih!")
-
-
 if __name__ == "__main__":
-
-    while(True):
-        show_menu()
+    show_menu()
