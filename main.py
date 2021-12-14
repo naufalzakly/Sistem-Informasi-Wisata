@@ -143,22 +143,40 @@ def update_wisata():
     with open (data_wisata, "r") as data:
         isi_data = json.load(data)
     temp = isi_data
-    
-    nama = input("Masukan Nama Wisata: ")
-    alamat = input("Masukan Alamat Wisata: ")
-    kategori = input("Masukan Kategori Wisata: ")
-    harga_tiket_weekday = int(input("Masukan harga saaat weekday: "))
-    harga_tiket_weekend= int(input("Masukan harga saaat weekend: "))
-    temp['nama'] = nama
-    temp['alamat'] = alamat
-    temp['kategori'] = kategori
-    temp['harga_tiket_weekday'] = harga_tiket_weekday
-    temp['harga_tiket_weekend'] = harga_tiket_weekend
-    with open (data_wisata, "w") as data_file:
-        dataa = json.dumps(temp, indent=4)
-        data_file.write(dataa)
-        print("Berhasil ditambahkan")
-    show_menu2_admin()
+    print ("----------- Halo Kak, Berikut Daftar Wisata ----------")
+    print ("[1] Pantai Papuma")
+    print ("[2] Taman Nasional Meru Beitri")
+    print ("[3] Kebun Teh Gunung Gambir")
+    print ("[4] Air Terjun Tancak")
+    print ("[5] Air Terjun Antrokan")
+    print ("[6] Pantai Bandealit")
+    print ("[7] Pantai Payangan")
+    print ("[8] Taman Edukasi Botani")
+    print ("[9] Taman Galaxy")
+    print ("[10] Kebun Belimbing")
+    print ("[11] Pantai Puger")
+    input_userr = int(input("Masukan Pilihan: "))
+    if input_userr == 1:
+        for i in range(len(temp)):
+            
+            input_user = input("Masukan Nama Wisata: ")
+            if temp[i]['nama'] == input_user:
+                nama = input("Masukan Nama Wisata: ")
+                alamat = input("Masukan Alamat Wisata: ")
+                kategori = input("Masukan Kategori Wisata: ")
+                harga_tiket_weekday = int(input("Masukan harga saaat weekday: "))
+                harga_tiket_weekend= int(input("Masukan harga saaat weekend: "))
+                temp[i]['nama'] = nama
+                temp[i]['alamat'] = alamat
+                temp[i]['kategori'] = kategori
+                temp[i]['harga_tiket_weekday'] = harga_tiket_weekday
+                temp[i]['harga_tiket_weekend'] = harga_tiket_weekend
+                with open (data_wisata, "w") as data_file:
+                    dataa = json.dumps(temp, indent=4)
+                    data_file.write(dataa)
+                    print("Berhasil diubah")
+            break
+
 
 def show_wisata_user():
     temp = []
