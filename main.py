@@ -251,44 +251,44 @@ def jumlah_wisata():
         print("="*100)
         print("\t\tJumlah Wisata untuk Kategori Air Terjun: ",sum)
         print("="*100)
-        total_tiket_weekend()
+        jumlah_wisata()
     elif input_user == 2:
         sum = 0
         for i in temp:
             if i['kategori'] == 'Kebun':
                 sum +=1
         print("="*100)
-        print("\t\tJumlah Wisata untuk Kategori Air Terjun: ",sum)
+        print("\t\tJumlah Wisata untuk Kategori Kebun: ",sum)
         print("="*100)
-        total_tiket_weekend()
+        jumlah_wisata()
     elif input_user == 3:
         sum = 0
         for i in temp:
             if i['kategori'] == 'Pantai':
                 sum +=1
         print("="*100)
-        print("\t\tJumlah Wisata untuk Kategori Air Terjun: ",sum)
+        print("\t\tJumlah Wisata untuk Kategori Pantai: ",sum)
         print("="*100)
-        total_tiket_weekend()
+        jumlah_wisata()
     elif input_user == 4:
         sum = 0
         for i in temp:
             if i['kategori'] == 'Taman':
                 sum +=1
         print("="*100)
-        print("\t\tJumlah Wisata untuk Kategori Air Terjun: ",sum)
+        print("\t\tJumlah Wisata untuk Kategori Taman: ",sum)
         print("="*100)
-        total_tiket_weekend()
+        jumlah_wisata()
     elif input_user == 5:
         print("="*100)
         print("\t\t\t\tJumlah Wisata pada Sistem: ",len(temp))
         print("="*100)
-    
+        jumlah_wisata()
     elif input_user == 6:
         show_menu_user()
     else:
         print("Inputan Salah")
-        total_tiket_weekend()
+        jumlah_wisata()
 
 def total_tiket_weekday():
     temp = []
@@ -599,8 +599,10 @@ def show_menu2_user():
     elif menu == 3:
         total_tiket_weekend()
     elif menu == 4:
-        mean_weekend()
+        total_tiket_weekday()
     elif menu == 5:
+        mean_weekend()
+    elif menu == 6:
         mean_weekday()    
     elif menu == 7:
         exit()
