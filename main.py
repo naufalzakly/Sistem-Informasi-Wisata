@@ -87,7 +87,7 @@ def show_wisata_admin():
         tiket_weekday = i['harga_tiket_weekday']
         table1.append([nama,alamat,kategori,tiket_weekday,tiket_weekend])
         
-    print(tabulate(table1,header,tablefmt='fancy_grid'))
+    print(tabulate(table1,header,tablefmt='grid'))
     print("\n")
     show_menu2_admin()
 
@@ -156,7 +156,7 @@ def update_wisata():
     print ("[10] Kebun Belimbing")
     print ("[11] Pantai Puger")
     input_userr = int(input("Masukan Pilihan: "))
-    if input_userr == 1:
+    if input_userr == 1 or input_userr == 2 or input_userr == 3 or input_userr == 4 or input_userr == 5 or input_userr == 6 or input_userr == 7 or input_userr == 8 or input_userr == 9 or input_userr == 10 or input_userr == 11 :
         for i in range(len(temp)):
             
             input_user = input("Masukan Nama Wisata: ")
@@ -175,7 +175,9 @@ def update_wisata():
                     dataa = json.dumps(temp, indent=4)
                     data_file.write(dataa)
                     print("Berhasil diubah")
-            break
+            else:
+                print("Salah input")
+                break
 
 
 def show_wisata_user():
@@ -223,7 +225,7 @@ def insert_saran_wisata():
             'harga_tiket_weekend':harga_tiket_weekend
         })
 
-        with open (data_wisata, "w") as data_file:
+        with open (data_saran_wisata, "w") as data_file:
             dataa = json.dumps(temp, indent=4)
             data_file.write(dataa)
             print("Berhasil ditambahkan")
